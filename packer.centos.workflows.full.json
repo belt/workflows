@@ -1,0 +1,101 @@
+{
+   "variables" : {
+     "box_name" : "workflows",
+     "os_major_release" : "7",
+     "os_minor_release" : "3",
+     "os_patch_release" : "1611",
+     "salt_master" : "10.0.2.2",
+     "megs_of_ram" : "4096",
+     "cpu_count" : "4",
+     "enable_mysql_support" : "1"
+   },
+   "builders" : [
+      {
+         "type" : "virtualbox-iso",
+         "vm_name" : "{{user `box_name`}}",
+         "vboxmanage" : [
+            [ "modifyvm", "{{.Name}}", "--memory", "{{user `megs_of_ram`}}" ],
+            [ "modifyvm", "{{.Name}}", "--cpus", "{{user `cpu_count`}}" ],
+            [ "modifyvm", "{{.Name}}", "--name", "{{user `box_name`}}" ]
+         ],
+         "guest_os_type" : "RedHat_64",
+         "guest_additions_mode" : "upload",
+         "guest_additions_path" : "VBoxGuestAdditions.iso",
+         "iso_url" : "http://mirrors.lga7.us.voxel.net/centos/{{user `os_major_release`}}/isos/x86_64/CentOS-{{user `os_major_release`}}-x86_64-Minimal-{{user `os_patch_release`}}.iso",
+         "iso_checksum_url" : "http://mirrors.lga7.us.voxel.net/centos/{{user `os_major_release`}}/isos/x86_64/sha256sum.txt",
+         "iso_checksum_type" : "sha256",
+         "http_directory" : "packer/scripts",
+         "shutdown_command" : "echo 'shutdown -P now' > shutdown.sh; echo 'vagrant' | sudo -S sh 'shutdown.sh'",
+         "headless" : false,
+         "boot_wait" : "2s",
+         "boot_command" : [
+            "<wait><esc><esc>",
+            "linux ks=http://{{.HTTPIP}}:{{.HTTPPort}}/kickstart<enter>"
+         ],
+         "ssh_username" : "vagrant",
+         "ssh_password" : "vagrant",
+         "ssh_port" : 22,
+         "ssh_wait_timeout" : "900s"
+      }
+   ],
+   "provisioners" : [
+      {
+         "override" : {
+            "virtualbox-iso" : {
+               "execute_command" : "echo 'vagrant' | {{ .Vars }} sudo -E -S sh '{{ .Path }}'"
+            }
+         },
+         "type" : "shell",
+         "environment_vars" : [
+            "OS_MAJOR_RELEASE={{user `os_major_release`}}",
+            "OS_MINOR_RELEASE={{user `os_minor_release`}}",
+            "BOX_NAME={{user `box_name`}}",
+            "SALT_MASTER={{user `salt_master`}}"
+         ],
+         "scripts" : [
+            "packer/scripts/setup_host.sh",
+            "packer/scripts/secure_vagrant_account.sh"
+         ]
+      },
+      {
+        "log_level" : "info",
+        "type" : "salt-masterless",
+        "local_state_tree" : "packer/salt",
+        "local_pillar_roots" : "packer/pillar",
+        "skip_bootstrap" : false
+      },
+      {
+         "override" : {
+            "virtualbox-iso" : {
+               "execute_command" : "echo 'vagrant' | {{ .Vars }} sudo -E -S sh '{{ .Path }}'"
+            }
+         },
+         "environment_vars" : [
+            "BOX_NAME={{user `box_name`}}",
+            "SALT_MASTER={{user `salt_master`}}",
+            "ENABLE_MYSQL_SUPPORT={{user `enable_mysql_support`}}"
+         ],
+         "scripts" : [
+            "packer/scripts/setup_salt_minion.sh",
+            "packer/scripts/reboot.sh"
+         ],
+         "type" : "shell"
+      }
+   ],
+   "post-processors" : [
+      {
+          "type" : "vagrant",
+          "output" : "boxes/{{user `box_name`}}-{{lower .BuildName}}.box",
+          "compression_level" : 9
+      },
+      {
+         "type" : "shell-local",
+         "environment_vars" : [
+            "BOX_NAME={{user `box_name`}}"
+         ],
+         "scripts" : [
+            "packer/scripts/setup_vagrant.sh"
+         ]
+     }
+   ]
+}

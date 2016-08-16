@@ -1,0 +1,4 @@
+---
+passwords:
+  system:
+    vagrant: vagrant

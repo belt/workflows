@@ -6,19 +6,20 @@
 
 *.rbc
 capybara-*.html
-/log
-/tmp
-/doc
-/public/system
-/spec/tmp
-.yardoc
+/log/
+/tmp/
+/doc/
+/public/assets/
+/spec/tmp/
+/spec/examples.txt
 rerun.txt
+.yardoc
 
 # these should never be checked as they contain passwords:
-config/secrets.yml
-config/database.yml
-config/initializers/secret_token.rb
-config/settings/
+/config/secrets.yml
+/config/database.yml
+/config/initializers/secret_token.rb
+/config/settings/
 
 ## Environment normalisation:
 /.bundle
@@ -30,18 +31,14 @@ config/settings/
 # ignore code-coverage files
 /coverage/
 
-spec/examples.txt
-
 # unless supporting rvm < 1.11.0 or doing something fancy, ignore this:
 .rvmrc
 
-# ruby runtime stuff
-.bundle/
-
 # packer temporary stuff
-packer_cache/
-output-virtualbox-iso/
+/packer_cache/
+/output-virtualbox-iso/
 
 # packer build artifacts
-.vagrant/
-boxes/
+/.vagrant/
+/boxes/
+packer/salt/keys/
