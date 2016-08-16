@@ -1,0 +1,17 @@
+Initializing Overcommit
+---
+overcommit --install
+overcommit --sign
+overcommit --sign pre-commit
+
+
+Credits
+-------
+Paul Belt <mailto:paul.belt+github@gmail.com>
+
+
+License
+-------
+All rights and complete ownership are belong to Paul Belt.
+
+Copyright (C)(©) 2016 Paul Belt. <https://github.com/belt>

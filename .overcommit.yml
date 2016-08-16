@@ -1,0 +1,55 @@
+# default configuration:
+# https://github.com/brigade/overcommit/blob/master/config/default.yml
+#
+# For a complete list of hooks, see:
+# https://github.com/brigade/overcommit/tree/master/lib/overcommit/hook
+#
+# For a complete list of options that you can use to customize hooks, see:
+# https://github.com/brigade/overcommit#configuration
+
+CommitMsg:
+  RussianNovel:
+    enabled: false
+
+# DO NOT ENABLE PostCheckout anything!!!
+# It opens a non-zero probability of remote-exploit via upstream repository.
+# DO NOT ENABLE PostCheckout anything!!!
+PostCheckout:
+  ALL:
+    enabled: false
+
+PreCommit:
+  Brakeman:
+    enabled: true
+  RailsSchemaUpToDate:
+    enabled: false
+  CssLint:
+    enabled: false
+  Jscs:
+    enabled: false
+  JsHint:
+    enabled: false
+  TrailingWhitespace:
+    enabled: true
+  HardTabs:
+    enabled: true
+  Rubocop:
+    enabled: true
+  Reek:
+    enabled: true
+  OvercommitLintBlacklist:
+    enabled: true
+    description: 'Prevent debuggings codes, warn on private keys'
+    include:
+      - '**/*.rb'
+      - '**/*.js'
+  EnsureFocusFreeSpecs:
+    enabled: true
+    description: 'Ensures there are no specs with focus tag'
+    include:
+      - '**/spec/**/*_spec.rb'
+  EnsureSpecHelper:
+    enabled: false
+    description: 'Checking for missing inclusion of spec_helper'
+    include:
+      - '**/spec/**/*_spec.rb'

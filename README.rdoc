@@ -1,0 +1,9 @@
+== README
+
+* for dependencies and configuration hints, see README.developer
+
+* How to run the test suite
+
+spring rspec
+
+If this stagnates for no apparent reason: spring stop; spring rspec
