@@ -1,0 +1,10 @@
+%div
+  %ul.flow_groups
+    - if @workflows
+      - @workflows.to_hash_groups(:flow_group).each do |flow_group, grp|
+        %li= flow_group
+        %ul.flows
+          - grp.each do |flow|
+            %li= link_to flow[:name], flow[:app_route]
+    - else
+      %li= link_to 'Workflows', '/'
