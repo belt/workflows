@@ -1,0 +1,19 @@
+Compiling assets on launch
+---
+To compile .coffee and .scss files in app/assets to javascript and css files respectively
+
+<code:sh>
+COMPILE_CONTROLLERS_ASSETS=1 rails s
+</code>
+
+
+Credits
+-------
+Paul Belt <mailto:paul.belt+github@gmail.com>
+
+
+License
+-------
+All rights and complete ownership are belong to Paul Belt.
+
+Copyright (C)(©) 2016 Paul Belt. <https://github.com/belt>
