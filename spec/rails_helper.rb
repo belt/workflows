@@ -1,4 +1,3 @@
-# frozen_string_literal: true
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
@@ -47,12 +46,23 @@ RSpec.configure do |config|
 
   config.before :suite do
     DatabaseCleaner.strategy = :transaction
-    DatabaseCleaner.clean_with :truncation
+
+    # :truncation unless foreign_key constraints, else :deletion
+    DatabaseCleaner.clean_with :deletion
   end
 
   config.around :each do |example|
+    # clean the DB
     DatabaseCleaner.cleaning do
-      example.run
+      # send emails
+      if example.metadata[:enable_mailer]
+        ActionMailer::Base.perform_deliveries = true
+        example.run
+        ActionMailer::Base.deliveries.clear
+        ActionMailer::Base.perform_deliveries = false
+      else
+        example.run
+      end
     end
   end
 end
