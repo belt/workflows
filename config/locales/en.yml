@@ -20,4 +20,31 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  date:
+    formats:
+      default:              "%d %b %Y"
+      filesystem:           "%Y%m%d"
+      humanized_date:       "%d %b %Y"
+      mon_year:             "%b %Y"
+      humanized_date:       "%d %b %Y"
+      humanized_datetime12: "%d %b %Y"
+      humanized_datetime24: "%d %b %Y"
+
+  time:
+    formats:
+      default:              "%a %d %b %Y %H:%M:%S %z"
+      filesystem:           "%Y%m%d%H%M%S"
+      long:                 "%d %b %Y %H:%M %z"
+      mon_year:             "%b %Y"
+      humanized_date:       "%d %b %Y"
+      humanized_datetime12: "%d %b %Y %I:%M:%S%p %z"
+      humanized_datetime24: "%d %b %Y %H:%M:%S %z"
+
+  datetime:
+    formats:
+      default:              "%d %b %Y %H:%M:%S %z"
+      filesystem:           "%d%m%Y%H%M%S"
+      mon_year:             "%b %Y"
+      humanized_date:       "%d %b %Y"
+      humanized_datetime12: "%d %b %Y %I:%M:%S%p %z"
+      humanized_datetime24: "%d %b %Y %H:%M:%S %z"
