@@ -22,6 +22,9 @@ Rails.application.configure do
   # number of complex assets.
   config.assets.debug = true
 
+  # Mutes assets pipeline requests
+  config.assets.quiet = true
+
   # Asset digests allow you to set far-future HTTP expiration dates on all assets,
   # yet still be able to expire them through the digest params.
   config.assets.digest = true
@@ -45,13 +48,10 @@ Rails.application.configure do
     end
   end
 
-  # :debug, :info, :warn, :error, :fatal, and :unknown
-  config.log_level = :debug
-
   # Use the lowest log level to ensure availability of diagnostic information
   # when problems arise.
   # :debug, :info, :warn, :error, :fatal, and :unknown
-  config.log_level = :warn
+  config.log_level = :info
 
   # Prepend all log lines with the following tags.
   # config.log_tags = [ :subdomain, :uuid ]
