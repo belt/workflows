@@ -21,7 +21,7 @@ gem 'draper'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
-gem 'turbolinks'
+#gem 'turbolinks'
 gem 'jbuilder'
 gem 'sdoc', group: :doc
 
