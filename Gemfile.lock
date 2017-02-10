@@ -478,7 +478,7 @@ DEPENDENCIES
   concurrent-ruby
   config
   database_cleaner
-  did_you_mean
+  did_you_mean (~> 1.0.2)
   draper
   faker
   fukuzatsu

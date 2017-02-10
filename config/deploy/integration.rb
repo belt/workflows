@@ -1,5 +1,5 @@
 set :log_level, :debug # :debug :info :error
-set :rbenv_ruby, '2.3.0'
+set :rbenv_ruby, '2.3.3'
 set :branch, :next
 set :rails_env, :integration
 set :default_env, fetch(:default_env).merge(CONFIGURE_OPTS: '--disable-install-doc')

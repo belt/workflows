@@ -73,7 +73,7 @@ group :development, :test, :ci, :integration do
   gem 'pry-stack_explorer'
   gem 'interactive_editor'
   gem 'awesome_print'
-  gem 'did_you_mean'
+  gem 'did_you_mean', '~> 1.0.2'
   gem 'webmock'
   gem 'hashdiff'
 end
