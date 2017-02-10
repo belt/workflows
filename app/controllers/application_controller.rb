@@ -4,8 +4,5 @@ class ApplicationController < ActionController::Base
   respond_to :html, :json
 
   include ForgeryProtection
-
-  def http_auth_token
-    @http_auth_token ||= Settings.project.http_auth_token
-  end
+  include HttpHeaderAuthorization
 end
