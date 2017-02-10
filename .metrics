@@ -1,0 +1,17 @@
+MetricFu::Configuration.run do |config|
+  config.configure_metric(:flog) do |flog|
+    flog.enabled = false
+  end
+  config.configure_metric(:cane) do |cane|
+    cane.line_length = 100
+  end
+  config.configure_metric(:churn) do |churn|
+    churn.start_date = '"3 months ago"'
+  end
+  config.configure_metric(:hotspots) do |hotspots|
+    hotspots.start_date = '"3 months ago"'
+  end
+  config.configure_metric(:rcov) do |rcov|
+    rcov.enabled = false
+  end
+end
