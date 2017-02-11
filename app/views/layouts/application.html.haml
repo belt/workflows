@@ -1,18 +1,32 @@
 !!!
 %html
   %head
-    %meta{content: 'text/html; charset=UTF-8', 'http-equiv' => 'Content-Type'}/
+    %meta{content: 'text/html; charset=UTF-8', 'http-equiv': 'Content-Type'}/
     %title Workflows
+    = favicon_link_tag 'favicon.ico', rel: 'shortcut icon'
     = stylesheet_link_tag    'application', media: 'all',
-                             'data-turbolinks-track' => true
-    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+                             'data-turbolinks-track': true
+    = javascript_include_tag 'application', type: 'application/javascript',
+                             'data-turbolinks-track': true
     = csrf_meta_tags
-  %body
-    .container
-      .page-header
-        %h1= @page_header
-      - flash.each do |type, _message|
-        %div{:class => "js-alert alert alert-#{bootstrap_class_for(type)} fade in"}
-          %button.close{'data-dismiss' => 'alert'} ×
-          = flash.discard(type)
-      = yield
+    = render 'layouts/header'
+    = render 'shared/spinner'
+    = render 'shared/flash_messages'
+    = render 'layouts/footer'
+  %body.container-fluid
+    .panel-group
+      / layout_header adds it's own .row
+      .panel.panel-heading.panel-default= yield :layout_header
+
+      / layout_flash adds it's own .row
+      = yield :layout_flash
+
+      / asynchronous data transfer
+      = yield :async_spinner
+
+      / body
+      .panel.panel-body= yield
+
+      / footer
+      .panel.panel-footer.small
+        = yield :layout_footer

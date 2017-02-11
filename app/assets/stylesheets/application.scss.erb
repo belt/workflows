@@ -12,8 +12,30 @@
  * files in this directory. It is generally better to create a new file per
  * style scope.
  *
- *= require scaffolds
- *= require jquery-ui
- *= require bootstrap.min
- *
  */
+@import 'scaffolds';
+@import 'jquery-ui';
+@import 'bootstrap.min';
+
+a[disabled='disabled'] {
+  pointer-events: none;
+}
+
+.alert {
+  margin: 1em 2em;
+}
+
+#header_text {
+  padding-left: 1em;
+}
+
+#logo_image {
+  border: none;
+  max-width: 9em;
+  padding-top: 0.1em;
+  padding-right: 0.1em;
+  padding-left: 0.1em;
+  padding-bottom: 0.1em;
+  border: none;
+  margin-right: none;
+}

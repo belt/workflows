@@ -1,0 +1,7 @@
+- content_for :layout_flash do
+  - flash.each do |type, _message|
+    .row{class: "panel-#{bootstrap_class_for(type)}"}
+      .js-alert.alert.fade.in{class: "alert-#{bootstrap_class_for(type)}", role: 'alert'}
+        %i.glyphicon{class: "glyphicon-#{bootstrap_class_for(type)}-sign"}/
+        = flash.discard type
+        %button.close{'data-dismiss' => 'alert'} ×

@@ -1,0 +1,14 @@
+- content_for :layout_header do
+  %h1.col-xs-10.col-sm-3.col-md-9
+    = yield :page_header
+    %br/
+    .small
+      / TODO: move this link out of the layout
+      %small= link_to 'Truthiness of Workflows', 'https://en.wikipedia.org/wiki/Workflow',
+        alt: 'Link to Workflow on Wikipedia', title: 'The truthiness there-of',
+        data: {toggle:'tooltip'}
+  .pull-right.col-xs-2.col-sm-2
+    %picture
+      %source{srcset: asset_path('paul_2007.cropped.jpg')}
+      #logo_image= image_tag '/assets/paul_2007.cropped.jpg',
+        alt: 'Paul circa 2007', class: 'img-responsive img-thumbnail'
