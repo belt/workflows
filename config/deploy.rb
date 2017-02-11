@@ -1,5 +1,6 @@
-# config valid only for capistrano-3.5.0
-lock '3.5.0'
+# grep capistrano-3 Gemfile.lock and ensure this matches
+# config valid only for capistrano-3.7.2
+lock '3.7.2'
 
 set :application, 'workflows'
 set :repo_url, 'git@github.com:belt/workflows.git'

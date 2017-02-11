@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 set :log_level, :info # :debug :info :error
 set :rbenv_ruby, '2.3.3'
 set :default_branch, :next
@@ -8,9 +9,17 @@ set :branch, ask('branch to deploy?', fetch(:default_branch))
 set :linked_files, fetch(:linked_files) + ["config/settings/#{fetch(:rails_env)}.yml"]
 set :linked_files, fetch(:linked_files) + ['config/initializers/gc.rb']
 
-set :user, 'vagrant'
-set :ssh_options, {forward_agent: true, port: 2222,
-                   keys: ['~/.vagrant.d/insecure_private_key']}
+vagrant_ssh_config = `vagrant ssh-config`.split("\n")[1..-1].map(&:strip)
+vagrant_ssh_config = vagrant_ssh_config.each_with_object({}) do |obj, conf|
+  key, val = obj.split(/\s+/, 2).map(&:strip)
+  conf[key] = val
+  conf
+end
+
+# TODO: figure out why port-forwarding is considered off by vagrant
+set :user, vagrant_ssh_config['User']
+set :ssh_options, {forward_agent: 'yes', port: vagrant_ssh_config['Port'],
+                   keys: [Rails.root.join('packer/salt/keys/id_rsa.vagrant.workflows')]}
 
 server 'localhost', user: 'deploy', roles: %w(web)
 server 'localhost', user: 'deploy', roles: %w(db), primary: true

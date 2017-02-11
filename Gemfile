@@ -3,8 +3,8 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 4.2.0'
 gem 'mysql2'
-gem 'rest-client'
 gem 'sequel-rails'
+gem 'rest-client'
 gem 'responders'
 
 gem 'haml-rails'
@@ -35,7 +35,9 @@ gem 'concurrent-ruby'
 group :development do
   gem 'overcommit', require: false
 
-  gem 'capistrano', require: false
+  # NOTE: when version-bumping capistrano, check the lock-directive parameter
+  #       in Rails.root.join 'config/deploy.rb'
+  gem 'capistrano', '~> 3.7.2', require: false
   gem 'capistrano-rails', require: false
   gem 'capistrano-bundler', require: false
   gem 'capistrano-rbenv', require: false
@@ -46,6 +48,13 @@ group :development do
   # Until the code from https://github.com/capistrano/passenger/issues/40
   # gets tagged
   gem 'capistrano-passenger', require: false
+
+  # https://github.com/net-ssh/net-ssh/issues/101
+  # //github.com/net-ssh/net-ssh/issues/478
+  gem 'net-ssh', '~> 4.0.1'
+  gem 'rbnacl'
+  #gem 'rbnacl-libsodium' # only if system doesn't have libsodium installed
+  gem 'bcrypt_pbkdf'
 end
 
 group :development, :test do
