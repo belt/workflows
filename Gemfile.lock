@@ -73,7 +73,7 @@ GEM
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     bond (0.5.1)
-    bootstrap (4.0.0.alpha3)
+    bootstrap (4.0.0.alpha6)
       autoprefixer-rails (>= 6.0.3)
       sass (>= 3.4.19)
     builder (3.2.3)
@@ -165,6 +165,7 @@ GEM
       railties (>= 3.0.0)
     faker (1.7.3)
       i18n (~> 0.5)
+    fastandand (1.0.1)
     fattr (2.3.0)
     ffi (1.9.17)
     flay (2.8.1)
@@ -496,6 +497,7 @@ DEPENDENCIES
   mysql2
   net-ssh (~> 4.0.1)
   overcommit
+  philtre-rails
   pry-bond
   pry-byebug
   pry-rescue
