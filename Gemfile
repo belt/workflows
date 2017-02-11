@@ -68,9 +68,6 @@ group :development, :test, :ci do
   gem 'metric_fu'
   gem 'rubocop', require: false
   gem 'fukuzatsu', require: false
-
-  gem 'rspec-rails'
-  gem 'faker'
 end
 
 group :development, :test, :ci, :integration do
@@ -85,6 +82,10 @@ group :development, :test, :ci, :integration do
   gem 'did_you_mean', '~> 1.0.2'
   gem 'webmock'
   gem 'hashdiff'
+
+  gem 'rspec-rails'
+  gem 'faker'
+  gem 'factory_girl_rails'
 end
 
 group :test, :ci do
