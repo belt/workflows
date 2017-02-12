@@ -15,7 +15,6 @@
 #= require jquery
 #= require jquery-ui
 #= require jquery_ujs
-#= require turbolinks
 #= require tether
 #= require bootstrap-sprockets
 #= require_tree .
@@ -27,7 +26,7 @@ $(document).ready ->
 
   $('[data-toggle="tooltip"]').tooltip()
 
-  dt_picker_opts = 
+  dt_picker_opts =
     'autoSize': true
     'showButtonPanel': true
     'maxViewMode': 2
